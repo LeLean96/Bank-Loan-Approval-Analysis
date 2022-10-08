@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flasgger import Swagger
 import pickle
 
@@ -75,8 +75,8 @@ def predict_loan_status():
     return jsonify(dict(loan_status=result))
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def notebook():
+    return send_from_directory('.', 'notebook.html')
 
 
 def predict_result(inputvector, modelname):
