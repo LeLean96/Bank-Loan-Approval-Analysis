@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import cross_origin
 from flasgger import Swagger
 import pickle
 
@@ -7,6 +8,7 @@ app = Flask(__name__)
 swagger = Swagger(app)
 
 @app.route('/predict_loan_status/', methods=['POST'])
+@cross_origin()
 def predict_loan_status():
     """Endpoint to predict Loan_Status for the given parameters
     ---
@@ -60,8 +62,6 @@ def predict_loan_status():
         examples:
           loan_status: true
     """
-    # predict_loan_status
-    # [0,1,2,1,0,4006,1526,168,360,1]
     label_mapping = {
         'Male': 0,
         'Female': 1,
