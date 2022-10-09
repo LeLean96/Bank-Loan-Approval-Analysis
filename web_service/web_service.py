@@ -8,7 +8,7 @@ app = Flask(__name__)
 swagger = Swagger(app)
 
 @app.route('/predict_loan_status/', methods=['POST'])
-@cross_origin()
+@cross_origin()  # CORS is necessary to support queries from other websites (e.g. AWP assignment).
 def predict_loan_status():
     """Endpoint to predict Loan_Status for the given parameters
     ---
@@ -77,6 +77,11 @@ def predict_loan_status():
 @app.route("/")
 def notebook():
     return send_from_directory('.', 'notebook.html')
+
+@app.route("/live_prediction/")
+def live_prediction():
+    return send_from_directory('.', 'live_prediction.html')
+
 
 
 def predict_result(inputvector, modelname):

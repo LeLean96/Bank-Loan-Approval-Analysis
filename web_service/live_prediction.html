@@ -228,14 +228,15 @@
                 data.dependents = parseInt(data.dependents);
                 data.credit_history = parseInt(data.credit_history);
                 // send request to api
-                fetch("https://s22adm.pythonanywhere.com/predict_loan_status/", {
+                // note that this page doesn't need to share the same origin with the API endpoint
+                // the same code can be used to issue cross-origin requests (if the url in fetch is changed)
+                fetch("/predict_loan_status/", {
                     "credentials": "omit",
                     "headers": {
                         "Content-Type": "application/json",
                     },
                     "body": JSON.stringify(data),
                     "method": "POST",
-                    "mode": "cors"
                 })
                 .then((response) => response.json())
                 .then((data) => {
